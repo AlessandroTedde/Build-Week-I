@@ -8,10 +8,13 @@ body {
    font-family: 'Outfit', sans-serif;
    color: #ebebeb;
    text-align: left;
-   margin-left: 10%;
    margin-top: 50px;
    background-image: url("../img/sfondo.jpeg");
    background-size: cover; 
+}
+
+.margin-left {
+   margin-left: 10%;
 }
 
 #imgLogo {
@@ -36,6 +39,25 @@ h3 {
    margin: 40px auto 10px auto;
 }
 
+h2 {
+   font-size: 3em;
+}
+
+.align-center {
+   text-align: center;
+}
+
+.align-right {
+   text-align: right;
+}
+
+.style-p-mid {
+   font-size: 2em;
+   font-weight: 300;
+   margin: 40px auto 10px auto;
+   max-width: 43%;
+}
+
 .paragrafo-welcome {
    margin-bottom: 40px;
    max-width: 500px;
@@ -57,12 +79,39 @@ li {
    cursor: pointer;
 }
 
-.form-wrapper button {
-   margin-left: 500px;
+   .fluoButton {
+   margin-top: 2rem;
    padding: 0.8em 2.5em;
    font-weight: bold;
    font-size: 1.2em;
    background-color: #00FFFF; 
    border: none;
    box-shadow: 0 0 20px #00FFFF;
+}
+
+.welcomeButton {
+   margin-left: 35%;
+   padding: 0.8em 2.5em;
+   font-weight: bold;
+   font-size: 1.2em;
+   background-color: #00FFFF; 
+   border: none;
+   box-shadow: 0 0 20px #00FFFF;
+}
+
+#commentText {
+   border: none;
+   border-bottom: 2px solid #C2128D;
+   background: none;
+   width: 45%;
+   height: 50px;
+}
+
+#commentText::placeholder {
+   padding: 3% 0 0 3%;
+   font-size: 1.2em;
+}
+
+.margin {
+   margin: 20px;
 }
