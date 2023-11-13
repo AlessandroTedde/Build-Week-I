@@ -29,3 +29,9 @@ b {
    font-weight: bold;
 }
 
+h3 {
+   color: #C2128D;
+   font-size: 2em;
+   font-weight: bold;
+   margin: 40px auto 10px auto;
+}
