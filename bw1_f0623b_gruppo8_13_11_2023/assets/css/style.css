@@ -116,3 +116,25 @@ li {
    margin: 20px;
 }
 
+.position {
+   position: relative;
+   text-align: right;
+   margin-right: 150px;
+   bottom: 100px;
+}
+
+#answer {
+   max-width: 50%;
+   margin: 0 auto;
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+}
+
+#answer div {
+   width: 25%;
+   border: 1px solid white;
+   border-radius: 35px;
+   padding: 25px 60px;
+   margin: 20px 15px;
+}
