@@ -136,7 +136,7 @@ function generateQuestions(currentQuestion, userAnswers) {
   let wrapper = document.getElementById('questionWrapper');
   wrapper.innerHTML = `
   <div id="question">
-    <h2>${questions[currentQuestion].question}</h2>
+    <h2 id="titoloDomanda">${questions[currentQuestion].question}</h2>
   </div>
   <div id="answer" class="align-center"></div>
   `;
