@@ -171,7 +171,7 @@ let nextQuestion = function (string) {
 function updateTimer() {
   
   let orologio = document.getElementById('timer')
-  orologio.innerHTML= `Timer: ${timerSeconds}`; 
+  orologio.innerHTML=timerSeconds; 
   
   if (timerSeconds == 0) {
     nextQuestion(null);
