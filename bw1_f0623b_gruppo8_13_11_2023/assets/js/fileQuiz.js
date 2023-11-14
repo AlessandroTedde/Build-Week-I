@@ -178,19 +178,59 @@ let nextQuestion = function (string) {
   result();
   }
 }
+
 function result () {
   let main = document.getElementById('main');
-  let result=0
+  let rightAnswers=0
+  let wrongAnswers = 0
   for(let i=0;i<questions.length;i++) {
     if (questions[i].correct_answer == userAnswers[i]){
-      result+=1;
+      rightAnswers+=1;
+    } else {
+      wrongAnswers+=1
     }
   }
 
+  main.innerHTML =`
 
-  main.innerHTML=`
-  ${result}/${questions.length}
+<div>
+  <h2 class="evidenziato">Result</h2> 
+  <p id="sottotitolo">the summary of your answer: <p> 
+</div>
+
+<div id="flexContainer">
+
+  <div class="Answers">
+   Correct <br> <span class="evidenziato"> ${(rightAnswers / questions.length)*100}% </span>
+  </div>
+
+  <div id="risultatoTestuale" class="flex">
+  
+  </div>
+
+  <div class="Answers">
+    Wrong <br> <span class="evidenziato"> ${(wrongAnswers / questions.length)*100}% </span>
+  </div>
+
+</div>
+
+<div>
+  <button id="resultButton"> RATE US </button>
+</div>
   `;
+
+  let testo; 
+
+  if ( rightAnswers >= 5 ) {
+    testo =`<span class="colorato"> Congratulazioni! Hai superato il test! </span>`
+  } else {
+    testo = ` <span class="colorato"> Mi dispiace, non hai superato il Test! </span>`
+  }
+
+
+  const risultatoTestuale = document.getElementById("risultatoTestuale"); 
+  risultatoTestuale.innerHTML = testo; 
+
 }
 
 function updateTimer() {

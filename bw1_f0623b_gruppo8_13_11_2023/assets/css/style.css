@@ -161,3 +161,42 @@ li {
 #timer{
    font-size: 2em;
 }
+
+#sottotitolo {
+   font-size: 1.5em;
+}
+
+#flexContainer {
+   display: flex;
+   justify-content: space-around;
+   margin: 3em;
+}
+
+#resultButton {
+   padding: 1.5em  5.5em;
+   background-color: transparent;
+   border: 1px solid white;
+   color: white;
+}
+
+.Answers {
+   font-size: 4em;
+   gap: 30px;
+}
+
+.evidenziato {
+   font-weight: bold;
+   margin-bottom: 20px;
+}
+
+.colorato {
+   color: #C2128D;
+   font-weight: bold;
+   font-size: larger;
+}
+
+.flex {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
