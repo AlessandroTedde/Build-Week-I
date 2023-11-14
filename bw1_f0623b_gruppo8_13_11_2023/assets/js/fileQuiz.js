@@ -185,7 +185,7 @@ function resetTimer() {
 
   timerSeconds = 30; 
   let orologio = document.getElementById('timer')
-  orologio.innerHTML=` Timer: ${timerSeconds}`;
+  orologio.innerHTML=timerSeconds;
   timerSeconds--;
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
