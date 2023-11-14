@@ -154,17 +154,44 @@ function generateQuestions(currentQuestion, userAnswers) {
   for (let i = 0; i < option.length; i++) {
     let element = option[i];
     element.addEventListener("click", () => {
-      console.log("ciao")
+      userAnswers.push(element.innerHTML);
+      console.log(userAnswers);
+      currentQuestion+=1;
+      generateQuestions(currentQuestion, userAnswers);
     })
   }
-
 }
+let clickAnswer = function (currentQuestion, userAnswers) {
 
+
+} 
+
+
+
+function timer(second) {
+
+   const orologio = document.querySelector("#timer");
+   orologio.style.fontSize = "2em";
+
+   const intervalId = setInterval(() => {
+
+      if (second <= 0) {
+         clearInterval(intervalId); 
+         generateQuestions(currentQuestion, userAnswers);
+      } else {
+         second--; 
+         orologio.innerHTML =` sec: ${second}`;
+      }
+
+   }, 1000);
+}
 window.onload = function () {
 
   let userAnswers = [];
   let currentQuestion = 0;
   generateQuestions(currentQuestion, userAnswers);
+  timer(5);
+
   // TIPS:
 
   // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
