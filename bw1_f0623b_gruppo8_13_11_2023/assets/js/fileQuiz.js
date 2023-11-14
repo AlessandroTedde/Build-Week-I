@@ -132,9 +132,9 @@ const questions = [
 ];
 
 
-function generateQuestions(currentQuestion) {
+function generateQuestions(currentQuestion,userAnswers) {
   let wrapper = document.getElementById('questionWrapper');
-  wrapper.innerHTML += `
+  wrapper.innerHTML = `
   <div id="question">
     <h2>${questions[currentQuestion].question}</h2>
   </div>
@@ -144,8 +144,14 @@ function generateQuestions(currentQuestion) {
   for (let i = 0; i < questions[currentQuestion].allAnswers.length; i++) {
     containerQuestion.innerHTML += `
     <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
-    `
+    `;
+    let option = document.getElementsByClassName('option');
+    option[i].addEventListener('click',(div)=> { console.log('ciao')})
   }
+
+  wrapper.innerHTML+= `
+  <div id="currentQuestion">Domanda ${currentQuestion+1}/10</div>
+  `
 
 }
 
@@ -153,7 +159,7 @@ window.onload = function () {
 
   let userAnswers = [];
   let currentQuestion = 0;
-  generateQuestions(currentQuestion);
+  generateQuestions(currentQuestion,userAnswers);
   // TIPS:
 
   // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
