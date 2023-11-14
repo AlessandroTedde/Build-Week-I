@@ -133,91 +133,83 @@ const questions = [
 
 
 function generateQuestions(currentQuestion, userAnswers) {
-
   let wrapper = document.getElementById('questionWrapper');
-  
   wrapper.innerHTML = `
   <div id="question">
-    <h2 id="titoloDomanda">${questions[currentQuestion].question}</h2>
+    <h2>${questions[currentQuestion].question}</h2>
   </div>
-  <div id="answer" class="align-center">
-  </div>
+  <div id="answer" class="align-center"></div>
   `;
-
   let containerQuestion = document.getElementById('answer');
   for (let i = 0; i < questions[currentQuestion].allAnswers.length; i++) {
     containerQuestion.innerHTML += `
     <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
     `;
   }
-
   wrapper.innerHTML += `
   <div id="currentQuestion">Domanda ${currentQuestion + 1}/10</div>
   `
-
   let option = document.getElementsByClassName('option');
 
   for (let i = 0; i < option.length; i++) {
     let element = option[i];
     element.addEventListener("click", () => {
-      userAnswers.push(element.innerHTML);
-      console.log(userAnswers);
-      currentQuestion += 1;
-      generateQuestions(currentQuestion, userAnswers);
-      clearInterval(intervalId);
+      nextQuestion(element.innerHTML);
+      resetTimer();
     })
   }
 }
-
-
-
-function timer(second, currentQuestion, userAnswers) {
-  let intervalId;
-
-  const orologio = document.querySelector("#timer");
-  orologio.style.fontSize = "2em";
-
-  clearInterval(intervalId);
-  intervalId = setInterval(() => {
-
-    if (second <= 0) {
-      
-      userAnswers.push(null);
-      currentQuestion += 1;
-      generateQuestions(currentQuestion, userAnswers);
-      console.log(userAnswers);
-      clearInterval(intervalId);
-    } else {
-      second--;
-      orologio.innerHTML = ` sec: ${second}`;
-    }
-
-  }, 1000);
+let nextQuestion = function (string) {
+  userAnswers.push(string);
+  console.log(userAnswers);
+  currentQuestion += 1;
+  generateQuestions(currentQuestion, userAnswers);
 }
 
+function updateTimer() {
+  
+  let orologio = document.getElementById('timer')
+  orologio.style.fontSize = "2em";
+
+  orologio.innerHTML=timerSeconds
+  if (timerSeconds == 0) {
+    nextQuestion(null);
+    resetTimer();
+  }
+  timerSeconds--;
+}
+function resetTimer() {
+  clearInterval(timerInterval); 
+  timerSeconds = 5; 
+  timerInterval = setInterval(function() {updateTimer();}, 1000); 
+}
+let timerSeconds;
+let timerInterval;
+let userAnswers = [];
+let currentQuestion;
 
 window.onload = function () {
-
-  let userAnswers = [];
-  let currentQuestion = 0;
+  currentQuestion=0;
   generateQuestions(currentQuestion, userAnswers);
-  timer(5, currentQuestion, userAnswers);
+  timerSeconds = 5;
+  timerInterval = setInterval(function() {updateTimer(); }, 1000);
 
 };
+  // timer(5, currentQuestion, userAnswers);
 
-// TIPS:
+  // TIPS:
 
-// SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
-// Per ogni domanda, crea un container e incorporale tutte all'interno. 
-// Crea poi dei radio button
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
-// con le risposte corrette e incorrette come opzioni
-// (dovrai probabilmente cercare su un motore di ricerca come ottenere un valore da un radio button in JS per ottenere il punteggio finale) 
-//
-// SE MOSTRI UNA DOMANDA ALLA VOLTA:
-// Mostra la prima domanda con il testo e i radio button.
-// Quando l'utente seleziona una risposta, passa alla domanda successiva dell'array e sostituisci quella precedentemente visualizzata con quella corrente,
-// salvando le risposte dell'utente in una variabile
+  // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
+  // Per ogni domanda, crea un container e incorporale tutte all'interno. 
+  // Crea poi dei radio button
+  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
+  // con le risposte corrette e incorrette come opzioni
+  // (dovrai probabilmente cercare su un motore di ricerca come ottenere un valore da un radio button in JS per ottenere il punteggio finale) 
+  //
+  // SE MOSTRI UNA DOMANDA ALLA VOLTA:
+  // Mostra la prima domanda con il testo e i radio button.
+  // Quando l'utente seleziona una risposta, passa alla domanda successiva dell'array e sostituisci quella precedentemente visualizzata con quella corrente,
+  // salvando le risposte dell'utente in una variabile
 
 
 // Come calcolare il risultato? Hai due strade:
