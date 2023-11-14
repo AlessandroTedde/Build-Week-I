@@ -132,7 +132,7 @@ const questions = [
 ];
 
 
-function generateQuestions(currentQuestion, userAnswers) {
+function generateQuestions() {
   let wrapper = document.getElementById('questionWrapper');
   wrapper.innerHTML = `
   <div id="question">
@@ -169,9 +169,8 @@ let nextQuestion = function (string) {
 function updateTimer() {
   
   let orologio = document.getElementById('timer')
-  orologio.style.fontSize = "2em";
-
   orologio.innerHTML=timerSeconds
+
   if (timerSeconds == 0) {
     nextQuestion(null);
     resetTimer();
@@ -182,7 +181,11 @@ function updateTimer() {
 
 function resetTimer() {
   clearInterval(timerInterval); 
+
   timerSeconds = 5; 
+  let orologio = document.getElementById('timer')
+  orologio.innerHTML=timerSeconds;
+
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
 }
@@ -196,8 +199,8 @@ let currentQuestion;
 
 window.onload = function () {
   currentQuestion=0;
-  generateQuestions(currentQuestion, userAnswers);
-  timerSeconds = 5;
+  generateQuestions();
+  timerSeconds = 60;
   timerInterval = setInterval(function() {updateTimer(); }, 1000);
 
 };
