@@ -158,10 +158,6 @@ li {
    margin-top: 100px;
 }
 
-#timer{
-   font-size: 2em;
-}
-
 #sottotitolo {
    font-size: 1.5em;
 }
@@ -199,4 +195,27 @@ li {
    display: flex;
    align-items: center;
    justify-content: center;
+}
+
+#timer {
+   font-size: 2em;
+}
+
+#progressBar {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 15px;
+   width: 100%;
+   background-color: #00FFFF;
+   animation: progressBarAnimation linear infinite;
+}
+
+@keyframes progressBarAnimation {
+   0% {
+       width: 100%;
+   }
+   100% {
+       width: 0;
+   }
 }

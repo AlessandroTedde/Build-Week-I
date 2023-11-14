@@ -175,6 +175,8 @@ let nextQuestion = function (string) {
   wrapper.remove();
   let orologio = document.getElementById('timer')
   orologio.remove();
+  let progressBar = document.getElementById('progressBar');
+  progressBar.remove();
   result();
   }
 }
@@ -234,26 +236,27 @@ function result () {
 }
 
 function updateTimer() {
-  
-  let orologio = document.getElementById('timer')
-  orologio.innerHTML=timerSeconds; 
-  
-  if (timerSeconds == 0) {
-    nextQuestion(null);
-    
-  }else{timerSeconds--;}
+
+  reloadTimerHtml();
+  if (timerSeconds == 0) {nextQuestion(null);} 
+  else {timerSeconds--;}
 }
 
 
 function resetTimer() {
   clearInterval(timerInterval); 
-
-  timerSeconds = 30; 
-  let orologio = document.getElementById('timer')
-  orologio.innerHTML=timerSeconds;
+  timerSeconds = 30;
+  reloadTimerHtml()
   timerSeconds--;
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
+}
+function reloadTimerHtml() {
+  let orologio = document.getElementById('timer')
+  orologio.innerHTML=timerSeconds;
+  let progressBar = document.getElementById('progressBar');
+  let percentage = (timerSeconds / 30) * 100;
+  progressBar.style.width = percentage + '%';
 }
 function stopTimer () {
   clearInterval(timerInterval);
