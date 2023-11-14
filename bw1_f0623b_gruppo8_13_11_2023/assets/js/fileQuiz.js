@@ -178,11 +178,17 @@ function updateTimer() {
   }
   timerSeconds--;
 }
+
+
 function resetTimer() {
   clearInterval(timerInterval); 
   timerSeconds = 5; 
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
+
 }
+
+
+
 let timerSeconds;
 let timerInterval;
 let userAnswers = [];
