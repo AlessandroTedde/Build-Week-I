@@ -154,49 +154,50 @@ function generateQuestions(currentQuestion, userAnswers) {
   for (let i = 0; i < option.length; i++) {
     let element = option[i];
     element.addEventListener("click", () => {
-      userAnswers.push(element.innerHTML);
-      console.log(userAnswers);
-      currentQuestion += 1;
-      generateQuestions(currentQuestion, userAnswers);
+      nextQuestion(element.innerHTML);
+      resetTimer();
     })
   }
 }
-let clickAnswer = function () {
 
-
+let nextQuestion = function (string) {
+  userAnswers.push(string);
+  console.log(userAnswers);
+  currentQuestion += 1;
+  generateQuestions(currentQuestion, userAnswers);
 }
 
-
-
-function timer(second, currentQuestion, userAnswers) {
-  let intervalId;
-
-  const orologio = document.querySelector("#timer");
+function updateTimer() {
+  
+  let orologio = document.getElementById('timer')
   orologio.style.fontSize = "2em";
 
-  clearInterval(intervalId);
-  intervalId = setInterval(() => {
-
-    if (second <= 0) {
-      
-      userAnswers.push(null);
-      currentQuestion += 1;
-      generateQuestions(currentQuestion, userAnswers);
-      console.log(userAnswers);
-      clearInterval(intervalId);
-    } else {
-      second--;
-      orologio.innerHTML = ` sec: ${second}`;
-    }
-
-  }, 1000);
+  orologio.innerHTML=timerSeconds
+  if (timerSeconds == 0) {
+    nextQuestion(null);
+    resetTimer();
+  }
+  timerSeconds--;
 }
-window.onload = function () {
 
-  let userAnswers = [];
-  let currentQuestion = 0;
+function resetTimer() {
+  clearInterval(timerInterval); 
+  timerSeconds = 5; 
+  timerInterval = setInterval(function() {updateTimer();}, 1000); 
+}
+let timerSeconds;
+let timerInterval;
+let userAnswers = [];
+let currentQuestion;
+
+window.onload = function () {
+  currentQuestion=0;
   generateQuestions(currentQuestion, userAnswers);
-  timer(5, currentQuestion, userAnswers);
+  timerSeconds = 5;
+  timerInterval = setInterval(function() {updateTimer(); }, 1000);
+
+};
+  // timer(5, currentQuestion, userAnswers);
 
   // TIPS:
 
@@ -211,7 +212,7 @@ window.onload = function () {
   // Mostra la prima domanda con il testo e i radio button.
   // Quando l'utente seleziona una risposta, passa alla domanda successiva dell'array e sostituisci quella precedentemente visualizzata con quella corrente,
   // salvando le risposte dell'utente in una variabile
-};
+
 
 // Come calcolare il risultato? Hai due strade:
 // Se stai mostrando tutte le domande nello stesso momento, controlla semplicemente se i radio button selezionati sono === correct_answer
