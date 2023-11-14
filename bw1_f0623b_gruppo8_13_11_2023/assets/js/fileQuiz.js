@@ -155,17 +155,42 @@ function generateQuestions() {
     let element = option[i];
     element.addEventListener("click", () => {
       nextQuestion(element.innerHTML);
-      resetTimer();
+      
     })
   }
 }
 
 
 let nextQuestion = function (string) {
+  if (userAnswers.length<questions.length-1) {
   userAnswers.push(string);
   console.log(userAnswers);
   currentQuestion += 1;
   generateQuestions(currentQuestion, userAnswers);
+  resetTimer();
+}
+  else {
+  stopTimer();
+  let wrapper = document.getElementById('questionWrapper');
+  wrapper.remove();
+  let orologio = document.getElementById('timer')
+  orologio.remove();
+  result();
+  }
+}
+function result () {
+  let main = document.getElementById('main');
+  let result=0
+  for(let i=0;i<questions.length;i++) {
+    if (questions[i].correct_answer == userAnswers[i]){
+      result+=1;
+    }
+  }
+
+
+  main.innerHTML=`
+  ${result}/${questions.length}
+  `;
 }
 
 function updateTimer() {
@@ -175,7 +200,7 @@ function updateTimer() {
   
   if (timerSeconds == 0) {
     nextQuestion(null);
-    resetTimer();
+    
   }else{timerSeconds--;}
 }
 
@@ -190,6 +215,9 @@ function resetTimer() {
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
 }
+function stopTimer () {
+  clearInterval(timerInterval);
+}
 
 
 
@@ -201,11 +229,14 @@ let currentQuestion;
 window.onload = function () {
   currentQuestion=0;
   generateQuestions();
+
   timerSeconds = 30;
+  let orologio = document.getElementById('timer')
+  orologio.innerHTML=timerSeconds;
+  timerSeconds--;
   timerInterval = setInterval(function() {updateTimer();}, 1000);
 
 };
-  // timer(5, currentQuestion, userAnswers);
 
   // TIPS:
 
