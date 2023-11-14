@@ -133,27 +133,34 @@ const questions = [
 
 
 function generateQuestions(currentQuestion, userAnswers) {
+
   let wrapper = document.getElementById('questionWrapper');
+  
   wrapper.innerHTML = `
   <div id="question">
-    <h2>${questions[currentQuestion].question}</h2>
+    <h2 id="titoloDomanda">${questions[currentQuestion].question}</h2>
   </div>
-  <div id="answer" class="align-center"></div>
+  <div id="answer" class="align-center">
+  </div>
   `;
+
   let containerQuestion = document.getElementById('answer');
   for (let i = 0; i < questions[currentQuestion].allAnswers.length; i++) {
     containerQuestion.innerHTML += `
     <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
     `;
   }
+
   wrapper.innerHTML += `
   <div id="currentQuestion">Domanda ${currentQuestion + 1}/10</div>
   `
+
   let option = document.getElementsByClassName('option');
 
   for (let i = 0; i < option.length; i++) {
     let element = option[i];
     element.addEventListener("click", () => {
+<<<<<<< HEAD
       nextQuestion(element.innerHTML);
       resetTimer();
     })
@@ -166,6 +173,16 @@ let nextQuestion = function (string) {
   currentQuestion += 1;
   generateQuestions(currentQuestion, userAnswers);
 }
+=======
+      userAnswers.push(element.innerHTML);
+      console.log(userAnswers);
+      currentQuestion += 1;
+      generateQuestions(currentQuestion, userAnswers);
+      clearInterval(intervalId);
+    })
+  }
+}
+>>>>>>> 09d535a50e59c9314a42373e9bc3df44eb91da96
 
 function updateTimer() {
   
@@ -179,6 +196,12 @@ function updateTimer() {
   }
   timerSeconds--;
 }
+<<<<<<< HEAD
+=======
+
+
+window.onload = function () {
+>>>>>>> 09d535a50e59c9314a42373e9bc3df44eb91da96
 
 function resetTimer() {
   clearInterval(timerInterval); 
@@ -199,6 +222,7 @@ window.onload = function () {
 };
   // timer(5, currentQuestion, userAnswers);
 
+<<<<<<< HEAD
   // TIPS:
 
   // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
@@ -212,6 +236,24 @@ window.onload = function () {
   // Mostra la prima domanda con il testo e i radio button.
   // Quando l'utente seleziona una risposta, passa alla domanda successiva dell'array e sostituisci quella precedentemente visualizzata con quella corrente,
   // salvando le risposte dell'utente in una variabile
+
+=======
+};
+>>>>>>> 09d535a50e59c9314a42373e9bc3df44eb91da96
+
+// TIPS:
+
+// SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
+// Per ogni domanda, crea un container e incorporale tutte all'interno. 
+// Crea poi dei radio button
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
+// con le risposte corrette e incorrette come opzioni
+// (dovrai probabilmente cercare su un motore di ricerca come ottenere un valore da un radio button in JS per ottenere il punteggio finale) 
+//
+// SE MOSTRI UNA DOMANDA ALLA VOLTA:
+// Mostra la prima domanda con il testo e i radio button.
+// Quando l'utente seleziona una risposta, passa alla domanda successiva dell'array e sostituisci quella precedentemente visualizzata con quella corrente,
+// salvando le risposte dell'utente in una variabile
 
 
 // Come calcolare il risultato? Hai due strade:
