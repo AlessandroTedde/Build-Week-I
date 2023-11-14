@@ -136,7 +136,7 @@ li {
    border: 1px solid white;
    border-radius: 35px;
    padding: 25px 60px;
-   margin: 20px 5px;
+   margin: 20px 80px;
    box-shadow: -2px -2px 2px white ;
    cursor: pointer;
 }
@@ -150,7 +150,7 @@ li {
 }
 
 #titoloDomanda {
-   margin-bottom: 60px;
+   margin-bottom: 80px;
    font-weight: bold;
 }
 
