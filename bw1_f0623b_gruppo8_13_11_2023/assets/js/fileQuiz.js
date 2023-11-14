@@ -145,13 +145,15 @@ function generateQuestions(currentQuestion,userAnswers) {
     containerQuestion.innerHTML += `
     <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
     `;
-    let option = document.getElementsByClassName('option');
-    option[i].addEventListener('click',(div)=> { console.log('ciao')})
   }
-
   wrapper.innerHTML+= `
   <div id="currentQuestion">Domanda ${currentQuestion+1}/10</div>
   `
+  let option = document.getElementsByClassName('option');
+  let arrayOption = Array.from(option);
+  arrayOption.forEach(element => {
+    element.addEventListener('click',function () { console.log('ciao')})
+  });
 
 }
 
