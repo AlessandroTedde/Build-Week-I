@@ -157,3 +157,7 @@ li {
 #currentQuestion {
    margin-top: 100px;
 }
+
+#timer{
+   font-size: 2em;
+}

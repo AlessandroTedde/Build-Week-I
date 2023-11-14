@@ -171,7 +171,7 @@ let nextQuestion = function (string) {
 function updateTimer() {
   
   let orologio = document.getElementById('timer')
-  orologio.innerHTML=timerSeconds
+  orologio.innerHTML= `Timer: ${timerSeconds}`; 
   
   if (timerSeconds == 0) {
     nextQuestion(null);
@@ -183,9 +183,9 @@ function updateTimer() {
 function resetTimer() {
   clearInterval(timerInterval); 
 
-  timerSeconds = 5; 
+  timerSeconds = 30; 
   let orologio = document.getElementById('timer')
-  orologio.innerHTML=timerSeconds;
+  orologio.innerHTML=` Timer: ${timerSeconds}`;
   timerSeconds--;
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
@@ -201,7 +201,7 @@ let currentQuestion;
 window.onload = function () {
   currentQuestion=0;
   generateQuestions();
-  timerSeconds = 60;
+  timerSeconds = 30;
   timerInterval = setInterval(function() {updateTimer();}, 1000);
 
 };
