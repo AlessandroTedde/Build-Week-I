@@ -159,6 +159,8 @@ function generateQuestions() {
     })
   }
 }
+
+
 let nextQuestion = function (string) {
   userAnswers.push(string);
   console.log(userAnswers);
@@ -170,12 +172,11 @@ function updateTimer() {
   
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds
-
+  
   if (timerSeconds == 0) {
     nextQuestion(null);
     resetTimer();
-  }
-  timerSeconds--;
+  }else{timerSeconds--;}
 }
 
 
@@ -185,7 +186,7 @@ function resetTimer() {
   timerSeconds = 5; 
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds;
-
+  timerSeconds--;
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
 }
@@ -201,7 +202,7 @@ window.onload = function () {
   currentQuestion=0;
   generateQuestions();
   timerSeconds = 60;
-  timerInterval = setInterval(function() {updateTimer(); }, 1000);
+  timerInterval = setInterval(function() {updateTimer();}, 1000);
 
 };
   // timer(5, currentQuestion, userAnswers);
