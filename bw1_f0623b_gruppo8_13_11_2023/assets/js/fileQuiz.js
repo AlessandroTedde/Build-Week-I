@@ -156,41 +156,47 @@ function generateQuestions(currentQuestion, userAnswers) {
     element.addEventListener("click", () => {
       userAnswers.push(element.innerHTML);
       console.log(userAnswers);
-      currentQuestion+=1;
+      currentQuestion += 1;
       generateQuestions(currentQuestion, userAnswers);
     })
   }
 }
-let clickAnswer = function (currentQuestion, userAnswers) {
+let clickAnswer = function () {
 
 
-} 
+}
 
 
 
-function timer(second) {
+function timer(second, currentQuestion, userAnswers) {
+  let intervalId;
 
-   const orologio = document.querySelector("#timer");
-   orologio.style.fontSize = "2em";
+  const orologio = document.querySelector("#timer");
+  orologio.style.fontSize = "2em";
 
-   const intervalId = setInterval(() => {
+  clearInterval(intervalId);
+  intervalId = setInterval(() => {
 
-      if (second <= 0) {
-         clearInterval(intervalId); 
-         generateQuestions(currentQuestion, userAnswers);
-      } else {
-         second--; 
-         orologio.innerHTML =` sec: ${second}`;
-      }
+    if (second <= 0) {
+      
+      userAnswers.push(null);
+      currentQuestion += 1;
+      generateQuestions(currentQuestion, userAnswers);
+      console.log(userAnswers);
+      clearInterval(intervalId);
+    } else {
+      second--;
+      orologio.innerHTML = ` sec: ${second}`;
+    }
 
-   }, 1000);
+  }, 1000);
 }
 window.onload = function () {
 
   let userAnswers = [];
   let currentQuestion = 0;
   generateQuestions(currentQuestion, userAnswers);
-  timer(5);
+  timer(5, currentQuestion, userAnswers);
 
   // TIPS:
 
