@@ -132,7 +132,7 @@ const questions = [
 ];
 
 
-function generateQuestions() {
+function generateQuestions(currentQuestion) {
   let wrapper = document.getElementById('questionWrapper');
   wrapper.innerHTML += `
   <div id="question">
@@ -140,6 +140,12 @@ function generateQuestions() {
   </div>
   <div id="answer" class="align-center"></div>
   `;
+  let containerQuestion = document.getElementById('answer');
+  for (let i = 0; i < questions[currentQuestion].allAnswers.length; i++) {
+    containerQuestion.innerHTML += `
+    <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
+    `
+  }
 
 }
 
@@ -147,7 +153,7 @@ window.onload = function () {
 
   let userAnswers = [];
   let currentQuestion = 0;
-  generateQuestions();
+  generateQuestions(currentQuestion);
   // TIPS:
 
   // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
