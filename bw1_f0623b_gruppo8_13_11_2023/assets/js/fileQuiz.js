@@ -305,6 +305,14 @@ function reloadTimerHtml() {
 function stopTimer () {
   clearInterval(timerInterval);
 }
+function randomize() {
+  let tempIndex = temp.length
+  for (let i = 0; i < tempIndex; i++) {
+    let randValue = Math.floor(Math.random() * temp.length);
+    randomQuestions.push(temp[randValue]);
+    temp.splice(randValue, 1);
+  }
+}
 /*
 qui c'è la lista delle variabili dichiarate
 timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
