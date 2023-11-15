@@ -272,40 +272,33 @@ sarà utilizzata come valore del div con Id risultatoTestuale precedentemente ge
   const risultatoTestuale = document.getElementById("risultatoTestuale"); 
   risultatoTestuale.innerHTML = testo;
 }
-/*
 
-*/
+function startTimer () {
+  timerInterval = setInterval(function() {updateTimer();}, 1000);
+}
+
+function stopTimer () {
+  clearInterval(timerInterval);
+}
 function updateTimer() {
 
   reloadTimerHtml();
   if (timerSeconds == 0) {nextQuestion(null);}
   else {timerSeconds--;}
 }
-
-
 function resetTimer() {
   stopTimer();
   timerSeconds = 30;
   reloadTimerHtml();
   timerSeconds--;
-  timerInterval = setInterval(function() {updateTimer();}, 1000); 
-
+  startTimer(); 
 }
-/*
-
-*/
 function reloadTimerHtml() {
   let orologio = document.getElementById('timer');
   orologio.innerHTML=timerSeconds;
   let progressBar = document.getElementById('progressBar');
   let percentage = (timerSeconds / 30) * 100;
   progressBar.style.width = percentage + '%';
-}
-/*
-
-*/
-function stopTimer () {
-  clearInterval(timerInterval);
 }
 /*
 qui c'è la lista delle variabili dichiarate
@@ -327,7 +320,7 @@ window.onload = function () {
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds;
   timerSeconds--;
-  timerInterval = setInterval(function() {updateTimer();}, 1000);
+  startTimer();
 
 };
 
