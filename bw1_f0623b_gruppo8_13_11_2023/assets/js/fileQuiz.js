@@ -217,7 +217,9 @@ function result () {
 </div>
 
 <div>
-  <button id="resultButton"> RATE US </button>
+  <form action = "feedback.html">
+    <button id="resultButton"> RATE US </button>
+  </form>
 </div>
   `;
 
@@ -231,8 +233,7 @@ function result () {
 
 
   const risultatoTestuale = document.getElementById("risultatoTestuale"); 
-  risultatoTestuale.innerHTML = testo; 
-
+  risultatoTestuale.innerHTML = testo;
 }
 
 function updateTimer() {
