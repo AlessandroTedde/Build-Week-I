@@ -133,6 +133,10 @@ const questions = [
 
 
 function generateQuestions() {
+  /* 
+  agganciato il wrapper che conterrà il titolo della domanda generata 
+  e crea un altro container che conterrà le risposte possibili
+  */
   let wrapper = document.getElementById('questionWrapper');
   wrapper.innerHTML = `
   <div id="question">
@@ -140,15 +144,26 @@ function generateQuestions() {
   </div>
   <div id="answer" class="align-center"></div>
   `;
+  /* 
+  aggancio il container precedentemente generato
+  tramite il for loop partendo da indice = 0, ovvero currentQuestion
+  abbiamo ciclato per tutta la lunghezza del array allAnswer all'interno dell'oggetto questions
+  */
   let containerQuestion = document.getElementById('answer');
   for (let i = 0; i < questions[currentQuestion].allAnswers.length; i++) {
     containerQuestion.innerHTML += `
     <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
     `;
   }
+  /*
+  sempre utilizzando il template literal abbiamo iniettato nel wrapper il valore (numero) corrente della domanda a cui stiamo rispondendo
+  */
   wrapper.innerHTML += `
   <div id="currentQuestion">Domanda ${currentQuestion + 1}/10</div>
   `
+  /* 
+  prendiamo ogni singola opzione tra le quattro, aggiungiamo un eventListener che al click triggera la funzione nextQuestion 
+  */
   let option = document.getElementsByClassName('option');
 
   for (let i = 0; i < option.length; i++) {
@@ -160,9 +175,16 @@ function generateQuestions() {
   }
 }
 
-
+/* 
+questa funzione controlla se l'array delle risposte è più corto dell'array che contiene tutte le domande
+se la condizione è vera la stringa all'interno del contenitore option viene pushata nell'array userAnswer
+l'indice aumenta di 1
+viene riavviata la funzione generateQuestion e viene resettato il timer
+se quella condizione è falsa e quindi l'utente ha risposto a tutte le domande il timer viene fermato
+e vengono rimossi tutti gli elementi al'interno del main, per creare spazio alla pagina del risultato (tramite funzione result)  
+*/
 let nextQuestion = function (string) {
-  if (userAnswers.length<questions.length-1) {
+  if (userAnswers.length < questions.length-1) {
   userAnswers.push(string);
   console.log(userAnswers);
   currentQuestion += 1;
@@ -181,15 +203,19 @@ let nextQuestion = function (string) {
   }
 }
 
+/* 
+viene agganciato il main, inizializzo due variabili, ciclo la lunghezza dell'array questions
+
+*/
 function result () {
   let main = document.getElementById('main');
-  let rightAnswers=0
-  let wrongAnswers = 0
-  for(let i=0;i<questions.length;i++) {
+  let rightAnswers = 0;
+  let wrongAnswers = 0;
+  for(let i=0; i < questions.length; i++) {
     if (questions[i].correct_answer == userAnswers[i]){
       rightAnswers+=1;
     } else {
-      wrongAnswers+=1
+      wrongAnswers+=1;
     }
   }
 
