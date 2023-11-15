@@ -219,3 +219,9 @@ li {
        width: 0;
    }
 }
+.opacityStar {
+   opacity: 0.1; 
+   
+   cursor: pointer;
+
+}
