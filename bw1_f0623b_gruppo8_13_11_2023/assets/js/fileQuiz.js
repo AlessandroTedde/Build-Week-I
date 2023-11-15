@@ -131,7 +131,6 @@ const questions = [
   },
 ];
 
-
 function generateQuestions() {
   /* 
   agganciato il wrapper che conterrà il titolo della domanda generata 
@@ -140,7 +139,7 @@ function generateQuestions() {
   let wrapper = document.getElementById('questionWrapper');
   wrapper.innerHTML = `
   <div id="question">
-    <h2 id="titoloDomanda">${questions[currentQuestion].question}</h2>
+    <h2 id="titoloDomanda">${randomQuestions[currentQuestion].question}</h2>
   </div>
   <div id="answer" class="align-center"></div>
   `;
@@ -150,9 +149,9 @@ function generateQuestions() {
   abbiamo ciclato per tutta la lunghezza del array allAnswer all'interno dell'oggetto questions
   */
   let containerQuestion = document.getElementById('answer');
-  for (let i = 0; i < questions[currentQuestion].allAnswers.length; i++) {
+  for (let i = 0; i < randomQuestions[currentQuestion].allAnswers.length; i++) {
     containerQuestion.innerHTML += `
-    <div class="option">${questions[currentQuestion].allAnswers[i]}</div>
+    <div class="option">${randomQuestions[currentQuestion].allAnswers[i]}</div>
     `;
   }
   /*
@@ -184,7 +183,7 @@ se quella condizione è falsa e quindi l'utente ha risposto a tutte le domande i
 e vengono rimossi tutti gli elementi al'interno del main, per creare spazio alla pagina del risultato (tramite funzione result)  
 */
 let nextQuestion = function (string) {
-  if (userAnswers.length < questions.length-1) {
+  if (userAnswers.length < randomQuestions.length-1) {
   userAnswers.push(string);
   console.log(userAnswers);
   currentQuestion += 1;
@@ -215,8 +214,8 @@ function result () {
   let main = document.getElementById('main');
   let rightAnswers = 0;
   let wrongAnswers = 0;
-  for(let i=0; i < questions.length; i++) {
-    if (questions[i].correct_answer == userAnswers[i]){
+  for(let i=0; i < randomQuestions.length; i++) {
+    if (randomQuestions[i].correct_answer == userAnswers[i]){
       rightAnswers+=1;
     } else {
       wrongAnswers+=1;
@@ -301,6 +300,12 @@ function reloadTimerHtml() {
   progressBar.style.width = percentage + '%';
 }
 /*
+
+*/
+function stopTimer () {
+  clearInterval(timerInterval);
+}
+/*
 qui c'è la lista delle variabili dichiarate
 timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
 timerInterval è utilizzata per storare il timer in se;
@@ -311,16 +316,18 @@ let timerSeconds;
 let timerInterval;
 let userAnswers = [];
 let currentQuestion;
+let temp = [...questions];
+let randomQuestions = [];
 
 window.onload = function () {
   currentQuestion=0;
+  randomize();
   generateQuestions();
-
   timerSeconds = 30;
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds;
   timerSeconds--;
-  startTimer();
+  timerInterval = setInterval(function() {updateTimer();}, 1000);
 
 };
 
