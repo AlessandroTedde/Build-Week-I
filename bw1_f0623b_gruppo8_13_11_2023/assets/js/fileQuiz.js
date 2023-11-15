@@ -192,6 +192,8 @@ let nextQuestion = function (string) {
   resetTimer();
 }
   else {
+  userAnswers.push(string);
+  console.log(userAnswers);
   stopTimer();
   let wrapper = document.getElementById('questionWrapper');
   wrapper.remove();
@@ -205,6 +207,8 @@ let nextQuestion = function (string) {
 
 /* 
 viene agganciato il main, inizializzo due variabili, ciclo la lunghezza dell'array questions
+se la risposta pushata nell'array userAnswers è uguale a una delle risposte contenute nella collezione correct_answer,
+il valore della variabile rightAnswers incrementa di uno, altrimenti incrementerà quello di wrongAnswers
 
 */
 function result () {
@@ -218,7 +222,10 @@ function result () {
       wrongAnswers+=1;
     }
   }
-
+/*
+dopodiché viene stabilito, tramite template literal, il nuovo HTML che dovrà avere la pagina del risultato,
+inserendo anche il calcolo in percentuale delle risposte giuste/sbagliate
+*/
   main.innerHTML =`
 
 <div>
@@ -248,7 +255,11 @@ function result () {
   </form>
 </div>
   `;
-
+/*
+qui viene dichiarata una variabile alla quale verrà assegnato un valore differente a seconda del numero di risposte esatte,
+se sono maggiori o uguali a 5 verrà mostrato un messaggio, altrimenti un altro. La variabile testo che contiene i messaggi 
+sarà utilizzata come valore del div con Id risultatoTestuale precedentemente generato con il template literal. 
+*/
   let testo; 
 
   if ( rightAnswers >= 5 ) {
@@ -261,36 +272,48 @@ function result () {
   const risultatoTestuale = document.getElementById("risultatoTestuale"); 
   risultatoTestuale.innerHTML = testo;
 }
+/*
 
+*/
 function updateTimer() {
 
   reloadTimerHtml();
-  if (timerSeconds == 0) {nextQuestion(null);} 
+  if (timerSeconds == 0) {nextQuestion(null);}
   else {timerSeconds--;}
 }
 
 
 function resetTimer() {
-  clearInterval(timerInterval); 
+  stopTimer();
   timerSeconds = 30;
-  reloadTimerHtml()
+  reloadTimerHtml();
   timerSeconds--;
   timerInterval = setInterval(function() {updateTimer();}, 1000); 
 
 }
+/*
+
+*/
 function reloadTimerHtml() {
-  let orologio = document.getElementById('timer')
+  let orologio = document.getElementById('timer');
   orologio.innerHTML=timerSeconds;
   let progressBar = document.getElementById('progressBar');
   let percentage = (timerSeconds / 30) * 100;
   progressBar.style.width = percentage + '%';
 }
+/*
+
+*/
 function stopTimer () {
   clearInterval(timerInterval);
 }
+/*
+qui c'è la lista delle variabili dichiarate
+timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
+timerInterval è utilizzata per storare il timer in se;
 
 
-
+*/
 let timerSeconds;
 let timerInterval;
 let userAnswers = [];
