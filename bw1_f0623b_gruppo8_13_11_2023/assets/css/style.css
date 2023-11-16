@@ -200,7 +200,7 @@ li {
 }
 
 #currentQuestion {
-   margin-top: 250px;
+   margin-top: 200px;
    font-size: 1.8em;
 }
 
@@ -298,23 +298,32 @@ li {
    width: 500px;
    position: relative;
    right: 520px;
-  /* top: 60px;*/
    display: inline-block;
 }
 
 #resultChart {
    margin-left: 200px;
-  /* margin-top: 100px;*/
    width:100%; 
    max-width:3000px; 
+}
+header {
+   display: flex;
+   justify-content: space-between;
+}
+#timerWrapper {
+   height: 200px;
+   width: 400px;
+
 }
 
 #timerChart {
    width: 100%;
    max-width: 300px;
-   display: inline;
 }
-#timer {
+#timerDiv {
    font-size: 2em;
    display: inline;
+   position: relative;
+   top: 90px;
+   left: 133px;
 }

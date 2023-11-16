@@ -196,7 +196,7 @@ let nextQuestion = function (string) {
   stopTimer();
   let wrapper = document.getElementById('questionWrapper');
   wrapper.remove();
-  let orologio = document.getElementById('timer')
+  let orologio = document.getElementById('timerWrapper')
   orologio.remove();
   let progressBar = document.getElementById('progressBar');
   progressBar.remove();
@@ -299,7 +299,6 @@ stata effettuata alcuna scelta da parte dell'utente.
 function updateTimer() {
 
   reloadTimerHtml();
-  donutTimer(timerSeconds);
   if (timerSeconds == 0) {nextQuestion(null);}
   else {timerSeconds--;}
   
@@ -316,7 +315,6 @@ La funzione resetTimer funziona in questa maniera:
 function resetTimer() {
   stopTimer();
   timerSeconds = 30;
-  donutTimer(timerSeconds);
   reloadTimerHtml();
   timerSeconds--;
   startTimer(); 
@@ -331,11 +329,19 @@ stabilisce un valore percentuale basandosi sul valore di timerSeconds nella vari
 tale valore servirà a stabilire la percentuale di riduzione della larghezza della progressBar.
 */
 function reloadTimerHtml() {
-  let orologio = document.getElementById('timer');
-  orologio.innerHTML=timerSeconds;
+  let orologio = document.getElementById('timerDiv');
+  if (timerSeconds > 9){
+    orologio.innerHTML=timerSeconds;
+  }else {
+    let stringNumber =`&nbsp;${timerSeconds}`;
+    orologio.innerHTML=stringNumber;
+  }
+
   let progressBar = document.getElementById('progressBar');
   let percentage = (timerSeconds / 30) * 100;
   progressBar.style.width = percentage + '%';
+
+  donutTimer(timerSeconds);
 }
 
 /*
@@ -364,7 +370,7 @@ function randomize() {
 function donutTimer(timerSeconds) {
   var avanzo = (30-timerSeconds);
   var xValues = ["Tempo rimanente", "Tempo passato"];
-  var yValues = [ avanzo,timerSeconds,];
+  var yValues = [ avanzo,timerSeconds];
   var barColors = ["#98699C", "#00FFFF"];
 
 
@@ -376,20 +382,18 @@ function donutTimer(timerSeconds) {
         backgroundColor: barColors, 
         borderColor: "rgba(0, 0, 0, 0)" , 
         data: yValues ,
-
       }]
     },
     options: {
       title: { display: false },
       cutoutPercentage: 75,                       // Adjust this value to set the size of the center hole
       legend: {display : false},
-      circumference : 2*Math.PI,
+  
       animation: {
-        animateRotate: false, // Disabilita l'animazione di rotazione
-        animateScale: false,   // Disabilita l'animazione di scala
+       animateRotate: false, // Disabilita l'animazione di rotazione
+       animateScale: false,   // Disabilita l'animazione di scala
       },
       events: [], // Disabilita completamente l'interazione al passaggio del mouse
-      
     }
   });
 }
@@ -451,10 +455,13 @@ window.onload = function () {
   currentQuestion=0;
   randomize();
   generateQuestions();
+
   timerSeconds = 30;
+
   donutTimer(timerSeconds);
-  let orologio = document.getElementById('timer')
+  let orologio = document.getElementById('timerDiv')
   orologio.innerHTML=timerSeconds;
+
   timerSeconds--;
   startTimer();
   
