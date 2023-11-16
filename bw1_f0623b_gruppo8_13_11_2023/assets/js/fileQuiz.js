@@ -172,7 +172,7 @@ function generateQuestions() {
       
     })
   }
-}
+};
 
 /* 
 questa funzione controlla se l'array delle risposte è più corto dell'array che contiene tutte le domande
@@ -202,7 +202,7 @@ let nextQuestion = function (string) {
   progressBar.remove();
   result();
   }
-}
+};
 
 /* 
 viene agganciato il main, inizializzo due variabili, ciclo la lunghezza dell'array questions
@@ -221,12 +221,12 @@ function result () {
       wrongAnswers+=1;
     }
   }
+
 /*
 dopodiché viene stabilito, tramite template literal, il nuovo HTML che dovrà avere la pagina del risultato,
 inserendo anche il calcolo in percentuale delle risposte giuste/sbagliate
 */
   main.innerHTML =`
-
 <div>
   <h2 class="evidenziato">Result</h2> 
   <p id="sottotitolo">the summary of your answer: <p> 
@@ -271,6 +271,7 @@ sarà utilizzata come valore del div con Id risultatoTestuale precedentemente ge
   const risultatoTestuale = document.getElementById("risultatoTestuale"); 
   risultatoTestuale.innerHTML = testo;
 }
+
 /*
 La funzione startTimer imposta un intervallo di tempo di 1000 millisecondi, inizializzando appunto il timer
 */
@@ -343,7 +344,6 @@ La funzione randomize:
    Splice in questo caso è in stretta collaborazione con randValue, perché ogni volta che un numero viene generato
    viene anche automaticamente rimosso il valore corrispondente dall'array, e randValue, potendo generare solo un numero compreso (esistente, disponibile)
    nella lunghezza dell'array temp, non potrà generare doppioni o numeri non compresi nell'array. 
-
 */
 function randomize() {
   let tempIndex = temp.length
@@ -351,8 +351,9 @@ function randomize() {
     let randValue = Math.floor(Math.random() * temp.length);
     randomQuestions.push(temp[randValue]);
     temp.splice(randValue, 1);
-  }
+  } 
 }
+
 /*
 qui c'è la lista delle variabili dichiarate:
 1) timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
@@ -371,6 +372,17 @@ let currentQuestion;
 let temp = [...questions];
 let randomQuestions = [];
 
+/*
+Infine la funzione onload (quando si carica la pagina):
+1) setta il valore della currentQuestion a 0;
+2) avvia la randomizzazione della domanda
+3) genera domanda e risposte corrispondenti a schermo;
+4) imposta il timer a 30 secondi;
+5) aggancia il div con Id timer dichiarandolo nella variabile orologio;
+6) imposta il valore di orologio uguale alla variabile timerSeconds;
+7) imposta il decremento dei secondi
+8) inizializza il timer.
+*/
 window.onload = function () {
   currentQuestion=0;
   randomize();
@@ -379,8 +391,7 @@ window.onload = function () {
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds;
   timerSeconds--;
-  timerInterval = setInterval(function() {updateTimer();}, 1000);
-
+  startTimer()
 };
 
   // TIPS:
