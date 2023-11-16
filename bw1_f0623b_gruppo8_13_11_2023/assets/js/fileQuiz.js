@@ -301,6 +301,7 @@ function updateTimer() {
   reloadTimerHtml();
   if (timerSeconds == 0) {nextQuestion(null);}
   else {timerSeconds--;}
+  donutTimer(timerSeconds);
 };
 
 /*
@@ -357,8 +358,36 @@ function randomize() {
     temp.splice(randValue, 1);
   } 
 }
+function donutTimer(timerSeconds) {
+  var avanzo = 30-timerSeconds;
+  var xValues = ["Wrong Answers", "Right Answers"];
+  var yValues = [ avanzo,timerSeconds,];
+  var barColors = ["#98699C", "#00FFFF"];
 
 
+  new Chart("myChart", {
+    type: "doughnut",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors, 
+        borderColor: "rgba(0, 0, 0, 0)" , 
+        data: yValues ,
+
+      }]
+    },
+    options: {
+      title: { display: false },
+      cutoutPercentage: 75,                       // Adjust this value to set the size of the center hole
+      legend: {display : false},
+      circumference : 2*Math.PI,
+      animation: {
+        animateRotate: false, // Disabilita l'animazione di rotazione
+        animateScale: false,   // Disabilita l'animazione di scala
+      }
+    }
+  });
+}
 function donutChart(wrongAnswers, rightAnswers) {
   var xValues = ["Wrong Answers", "Right Answers"];
   var yValues = [wrongAnswers, rightAnswers];
@@ -421,7 +450,7 @@ window.onload = function () {
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds;
   timerSeconds--;
-  startTimer()
+  startTimer();
 };
 
   // TIPS:
