@@ -13,12 +13,12 @@ function feedbackStars() {
         star.addEventListener("click", function () {
             clicked = true;
 
-            // Rimuovi la classe "opacityStar" da tutte le stelle
+            // Aggiungi la classe "opacityStar" da tutte le stelle
             stars.forEach(function (s) {
                 s.classList.add("opacityStar");
             });
 
-            // Aggiungi la classe "opacityStar" solo alle stelle fino a quella cliccata
+            // Rimuove la classe "opacityStar" solo alle stelle fino a quella cliccata
             for (let i = 0; i <= index; i++) {
                 stars[i].classList.remove("opacityStar");
             }
