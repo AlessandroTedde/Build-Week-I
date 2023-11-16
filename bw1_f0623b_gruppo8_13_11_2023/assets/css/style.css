@@ -230,6 +230,9 @@ li {
 .Answers {
    font-size: 4em;
    gap: 30px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
 }
 
 .evidenziato {
@@ -238,9 +241,12 @@ li {
 }
 
 .colorato {
+   display: inline-block;
+   width: 245px;
+   height: 100px;
    color: #C2128D;
    font-weight: bold;
-   font-size: larger;
+   font-size: 2em;
 }
 
 .flex {
@@ -275,5 +281,24 @@ li {
    opacity: 0.1; 
    
    cursor: pointer;
+
+}
+#risultatoTestuale {
+   width: 800px;
+}
+
+#textResult {
+   width: 500px;
+   position: relative;
+   right: 520px;
+   top: 60px;
+   display: inline-block;
+}
+
+#myChart {
+   margin-left: 200px;
+   margin-top: 100px;
+   width:100%; 
+   max-width:3000px; 
 
 }

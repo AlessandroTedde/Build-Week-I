@@ -235,15 +235,16 @@ inserendo anche il calcolo in percentuale delle risposte giuste/sbagliate
 <div id="flexContainer">
 
   <div class="Answers">
-   Correct <br> <span class="evidenziato"> ${(rightAnswers / questions.length)*100}% </span>
+   Correct <br> <span class="evidenziato"> ${(rightAnswers / randomQuestions.length)*100}% </span>
   </div>
 
   <div id="risultatoTestuale" class="flex">
-  
+  <canvas id="myChart"></canvas>
+  <div id="textResult"></div>
   </div>
 
   <div class="Answers">
-    Wrong <br> <span class="evidenziato"> ${(wrongAnswers / questions.length)*100}% </span>
+    Wrong <br> <span class="evidenziato"> ${(wrongAnswers / randomQuestions.length)*100}% </span>
   </div>
 
 </div>
@@ -267,9 +268,11 @@ sarà utilizzata come valore del div con Id risultatoTestuale precedentemente ge
     testo = ` <span class="colorato"> Mi dispiace, non hai superato il Test! </span>`
   }
 
+  const textResult = document.getElementById("textResult"); 
+  textResult.innerHTML = testo;
 
-  const risultatoTestuale = document.getElementById("risultatoTestuale"); 
-  risultatoTestuale.innerHTML = testo;
+  donutChart
+  (wrongAnswers , rightAnswers ) 
 }
 
 /*
@@ -353,7 +356,32 @@ function randomize() {
     temp.splice(randValue, 1);
   } 
 }
+function donutChart
+(wrongAnswers, rightAnswers) {
+  var xValues = ["Wrong Answers", "Right Answers"];
+  var yValues = [wrongAnswers, rightAnswers];
+  var barColors = ["#C2128D", "#00FFFF"];
 
+
+  new Chart("myChart", {
+    type: "doughnut",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors, 
+        borderColor: "rgba(0, 0, 0, 0)" , 
+        data: yValues ,
+
+      }]
+    },
+    options: {
+      title: { display: false },
+      cutoutPercentage: 75,                       // Adjust this value to set the size of the center hole
+      legend: {display : false},
+      circumference : 2*Math.PI
+    }
+  });
+}
 /*
 qui c'è la lista delle variabili dichiarate:
 1) timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
