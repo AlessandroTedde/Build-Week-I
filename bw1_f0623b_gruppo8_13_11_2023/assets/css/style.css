@@ -163,13 +163,7 @@ li {
    margin: 20px;
 }
 
-.position {
-   position: relative;
-   text-align: right;
-   margin-right: 150px;
-   bottom: 100px;
-   display: inline;
-}
+
 
 #answer {
    max-width: 100%;
@@ -272,10 +266,6 @@ li {
    justify-content: center;
 }
 
-#timer {
-   font-size: 2em;
-}
-
 #progressBar {
    position: fixed;
    bottom: 0;
@@ -322,4 +312,9 @@ li {
 #timerChart {
    width: 100%;
    max-width: 300px;
+   display: inline;
+}
+#timer {
+   font-size: 2em;
+   display: inline;
 }

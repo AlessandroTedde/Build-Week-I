@@ -362,8 +362,8 @@ function randomize() {
   } 
 }
 function donutTimer(timerSeconds) {
-  var avanzo = 30-timerSeconds;
-  var xValues = ["Wrong Answers", "Right Answers"];
+  var avanzo = (30-timerSeconds);
+  var xValues = ["Tempo rimanente", "Tempo passato"];
   var yValues = [ avanzo,timerSeconds,];
   var barColors = ["#98699C", "#00FFFF"];
 
@@ -452,10 +452,12 @@ window.onload = function () {
   randomize();
   generateQuestions();
   timerSeconds = 30;
+  donutTimer(timerSeconds);
   let orologio = document.getElementById('timer')
   orologio.innerHTML=timerSeconds;
   timerSeconds--;
   startTimer();
+  
 };
 
   // TIPS:
