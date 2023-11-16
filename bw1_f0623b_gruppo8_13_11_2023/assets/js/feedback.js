@@ -27,7 +27,8 @@ function feedbackStars() {
                 for (let i = 0; i <= index; i++) {
                     stars[i].classList.remove("opacityStar");
                 }
-            }// else if funziona dal secondo click in poi
+            }
+            // else if funziona dal secondo click in poi
             else if (clicked == true && lastclicked != index) {
                 lastclicked = index;
 
