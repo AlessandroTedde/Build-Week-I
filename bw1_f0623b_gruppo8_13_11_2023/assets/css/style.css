@@ -322,8 +322,4 @@ li {
 #timerChart {
    width: 100%;
    max-width: 300px;
-   display: inline;
-   position: relative;
-   bottom: 190px;
-   left: 1398px;
 }

@@ -299,9 +299,10 @@ stata effettuata alcuna scelta da parte dell'utente.
 function updateTimer() {
 
   reloadTimerHtml();
+  donutTimer(timerSeconds);
   if (timerSeconds == 0) {nextQuestion(null);}
   else {timerSeconds--;}
-  donutTimer(timerSeconds);
+  
 };
 
 /*
@@ -315,9 +316,11 @@ La funzione resetTimer funziona in questa maniera:
 function resetTimer() {
   stopTimer();
   timerSeconds = 30;
+  donutTimer(timerSeconds);
   reloadTimerHtml();
   timerSeconds--;
   startTimer(); 
+  
 }
 
 /*
@@ -384,7 +387,9 @@ function donutTimer(timerSeconds) {
       animation: {
         animateRotate: false, // Disabilita l'animazione di rotazione
         animateScale: false,   // Disabilita l'animazione di scala
-      }
+      },
+      events: [], // Disabilita completamente l'interazione al passaggio del mouse
+      
     }
   });
 }
