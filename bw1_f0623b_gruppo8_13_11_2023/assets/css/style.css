@@ -51,6 +51,10 @@ h2 {
    text-align: right;
 }
 
+.align-left {
+   text-align: left;
+}
+
 .style-p-mid {
    font-size: 2em;
    font-weight: 300;
@@ -172,9 +176,11 @@ li {
    display: flex;
    justify-content: space-evenly;
    flex-wrap: wrap;
+   height: 220px;
 }
 
 #answer div {
+   height: 70px;
    width: 500px;
    border: 1px solid #ebebeb;
    border-radius: 35px;
@@ -193,6 +199,7 @@ li {
 }
 
 #titoloDomanda {
+   height: 150px;
    margin-bottom: 80px;
    font-weight: bold;
 }
@@ -206,8 +213,12 @@ li {
    color: #C2128D;
 }
 
-#sottotitolo {
-   font-size: 1.5em;
+.sottotitolo {
+   font-size: 1.8em;
+}
+
+.sottotitoletto {
+   font-size: 0.4em;
 }
 
 #flexContainer {
@@ -236,16 +247,22 @@ li {
 
 .evidenziato {
    font-weight: bold;
-   margin-bottom: 20px;
+   margin-bottom: 8px;
 }
 
-.colorato {
+.colorato  {
    display: inline-block;
    width: 245px;
    height: 100px;
-   color: #C2128D;
+   color: #00FFFF;;
    font-weight: bold;
    font-size: 2em;
+}
+
+.resultDonut {
+   color: #ebebeb;
+   font-weight: bold;
+   font-size: 1em;
 }
 
 .flex {

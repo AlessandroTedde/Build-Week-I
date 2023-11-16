@@ -228,14 +228,15 @@ inserendo anche il calcolo in percentuale delle risposte giuste/sbagliate
 */
   main.innerHTML =`
 <div>
-  <h2 class="evidenziato">Result</h2> 
-  <p id="sottotitolo">the summary of your answer: <p> 
+  <h2 class="evidenziato">Results</h2> 
+  <p class="sottotitolo">The summary of your answer: </p> 
 </div>
 
 <div id="flexContainer">
 
-  <div class="Answers">
+  <div class="Answers align-left">
    Correct <br> <span class="evidenziato"> ${(rightAnswers / randomQuestions.length)*100}% </span>
+   <p class="sottotitoletto"> ${rightAnswers}/${randomQuestions.length} questions </p> 
   </div>
 
   <div id="risultatoTestuale" class="flex">
@@ -243,8 +244,9 @@ inserendo anche il calcolo in percentuale delle risposte giuste/sbagliate
   <div id="textResult"></div>
   </div>
 
-  <div class="Answers">
+  <div class="Answers align-right">
     Wrong <br> <span class="evidenziato"> ${(wrongAnswers / randomQuestions.length)*100}% </span>
+    <p class="sottotitoletto"> ${wrongAnswers}/${randomQuestions.length} questions </p> 
   </div>
 
 </div>
@@ -263,9 +265,9 @@ sarà utilizzata come valore del div con Id risultatoTestuale precedentemente ge
   let testo; 
 
   if ( rightAnswers >= 5 ) {
-    testo =`<span class="colorato"> Congratulazioni! Hai superato il test! </span>`
+    testo =` <span class="colorato"> <span class="resultDonut"> Congratulations!</span> you passed the exam </span>`
   } else {
-    testo = ` <span class="colorato"> Mi dispiace, non hai superato il Test! </span>`
+    testo = ` <span class="colorato"> <span class="resultDonut"> Sorry! </span> <br> you didn't pass the exam </span>`
   }
 
   const textResult = document.getElementById("textResult"); 
@@ -355,8 +357,9 @@ function randomize() {
     temp.splice(randValue, 1);
   } 
 }
-function donutChart
-(wrongAnswers, rightAnswers) {
+
+
+function donutChart(wrongAnswers, rightAnswers) {
   var xValues = ["Wrong Answers", "Right Answers"];
   var yValues = [wrongAnswers, rightAnswers];
   var barColors = ["#C2128D", "#00FFFF"];
