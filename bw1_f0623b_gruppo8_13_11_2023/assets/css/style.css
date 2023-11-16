@@ -134,16 +134,16 @@ li {
 
 #answer div {
    width: 500px;
-   border: 1px solid white;
+   border: 1px solid #ebebeb;
    border-radius: 35px;
    padding: 25px 60px;
    margin: 20px 80px;
-   box-shadow: -2px -2px 2px white ;
+   box-shadow: -2px -2px 2px #ebebeb;
    cursor: pointer;
 }
 
 #answer div:hover {
-   background-color: rgb(241, 104, 127) ;
+   background-color: #C2128D;
 }
 
 #questionWrapper {
