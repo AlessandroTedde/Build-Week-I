@@ -47,10 +47,6 @@ function feedbackStars() {
 
 
 
-
-
-
-
 window.onload = function () {
     createStars();
     feedbackStars();

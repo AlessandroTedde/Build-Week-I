@@ -350,6 +350,7 @@ La funzione randomize:
    viene anche automaticamente rimosso il valore corrispondente dall'array, e randValue, potendo generare solo un numero compreso (esistente, disponibile)
    nella lunghezza dell'array temp, non potrà generare doppioni o numeri non compresi nell'array. 
 */
+
 function randomize() {
   let tempIndex = temp.length
   for (let i = 0; i < tempIndex; i++) {
@@ -358,36 +359,7 @@ function randomize() {
     temp.splice(randValue, 1);
   } 
 }
-function donutTimer(timerSeconds) {
-  var avanzo = 30-timerSeconds;
-  var xValues = ["Wrong Answers", "Right Answers"];
-  var yValues = [ avanzo,timerSeconds,];
-  var barColors = ["#98699C", "#00FFFF"];
 
-
-  new Chart("timerChart", {
-    type: "doughnut",
-    data: {
-      labels: xValues,
-      datasets: [{
-        backgroundColor: barColors, 
-        borderColor: "rgba(0, 0, 0, 0)" , 
-        data: yValues ,
-
-      }]
-    },
-    options: {
-      title: { display: false },
-      cutoutPercentage: 75,                       // Adjust this value to set the size of the center hole
-      legend: {display : false},
-      circumference : 2*Math.PI,
-      animation: {
-        animateRotate: false, // Disabilita l'animazione di rotazione
-        animateScale: false,   // Disabilita l'animazione di scala
-      }
-    }
-  });
-}
 function donutChart(wrongAnswers, rightAnswers) {
   var xValues = ["Wrong Answers", "Right Answers"];
   var yValues = [wrongAnswers, rightAnswers];
@@ -413,6 +385,7 @@ function donutChart(wrongAnswers, rightAnswers) {
     }
   });
 }
+
 /*
 qui c'è la lista delle variabili dichiarate:
 1) timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
@@ -443,7 +416,7 @@ Infine la funzione onload (quando si carica la pagina):
 8) inizializza il timer.
 */
 window.onload = function () {
-  currentQuestion=0;
+  currentQuestion = 0;
   randomize();
   generateQuestions();
   timerSeconds = 30;
