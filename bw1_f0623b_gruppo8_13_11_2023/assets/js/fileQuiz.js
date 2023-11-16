@@ -240,7 +240,7 @@ inserendo anche il calcolo in percentuale delle risposte giuste/sbagliate
   </div>
 
   <div id="risultatoTestuale" class="flex">
-  <canvas id="myChart"></canvas>
+  <canvas id="resultChart"></canvas>
   <div id="textResult"></div>
   </div>
 
@@ -365,7 +365,7 @@ function donutTimer(timerSeconds) {
   var barColors = ["#98699C", "#00FFFF"];
 
 
-  new Chart("myChart", {
+  new Chart("timerChart", {
     type: "doughnut",
     data: {
       labels: xValues,
@@ -394,7 +394,7 @@ function donutChart(wrongAnswers, rightAnswers) {
   var barColors = ["#C2128D", "#00FFFF"];
 
 
-  new Chart("myChart", {
+  new Chart("resultChart", {
     type: "doughnut",
     data: {
       labels: xValues,

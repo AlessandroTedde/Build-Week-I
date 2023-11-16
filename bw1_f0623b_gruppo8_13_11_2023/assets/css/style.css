@@ -311,10 +311,14 @@ li {
    display: inline-block;
 }
 
-#myChart {
+#resultChart {
    margin-left: 200px;
   /* margin-top: 100px;*/
    width:100%; 
    max-width:3000px; 
+}
 
+#timerChart {
+   width: 100%;
+   max-width: 500px;
 }
