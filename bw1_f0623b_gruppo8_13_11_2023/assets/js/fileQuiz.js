@@ -271,7 +271,7 @@ sarà utilizzata come valore del div con Id risultatoTestuale precedentemente ge
   const textResult = document.getElementById("textResult"); 
   textResult.innerHTML = testo;
 
-  donutChart(wrongAnswers , rightAnswers );
+  donutChart(wrongAnswers , rightAnswers ) 
 }
 
 /*

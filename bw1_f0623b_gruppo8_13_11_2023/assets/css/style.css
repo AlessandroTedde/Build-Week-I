@@ -229,7 +229,6 @@ li {
 
 .Answers {
    font-size: 4em;
-   gap: 30px;
    display: flex;
    flex-direction: column;
    justify-content: center;
