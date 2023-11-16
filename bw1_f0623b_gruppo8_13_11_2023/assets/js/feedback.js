@@ -11,7 +11,8 @@ function feedbackStars() {
 
     stars.forEach(function (star, index) {
         star.addEventListener("click", function () {
-            clicked = true;
+            if(clicked == false){clicked=true}
+            else if (clicked == true){clicked=false}
 
             // Aggiungi la classe "opacityStar" da tutte le stelle
             stars.forEach(function (s) {
