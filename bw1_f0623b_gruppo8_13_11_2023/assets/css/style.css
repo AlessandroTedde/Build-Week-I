@@ -295,10 +295,13 @@ li {
 }
 .opacityStar {
    opacity: 0.1; 
-   
    cursor: pointer;
-
 }
+
+.margin {
+   margin: 3px;
+}
+
 #risultatoTestuale {
    width: 800px;
 }

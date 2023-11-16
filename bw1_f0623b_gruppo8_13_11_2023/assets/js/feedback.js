@@ -1,7 +1,7 @@
 function createStars() {
     let starContainer = document.getElementById('rating');
     for (let i = 0; i < 10; i++){
-        starContainer.innerHTML+=`<img src="assets/img/star.svg" alt="stellina rating" class="opacityStar">`;
+        starContainer.innerHTML+=`<img src="assets/img/star.svg" alt="stellina rating" class="opacityStar margin">`;
     }
 }
 
