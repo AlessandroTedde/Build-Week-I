@@ -156,7 +156,12 @@ li {
 }
 
 #currentQuestion {
-   margin-top: 100px;
+   margin-top: 250px;
+   font-size: 1.8em;
+}
+
+#currentQuestion span {
+   color: #C2128D;
 }
 
 #sottotitolo {

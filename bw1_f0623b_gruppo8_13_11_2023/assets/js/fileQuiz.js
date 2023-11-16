@@ -142,7 +142,7 @@ function generateQuestions() {
     <h2 id="titoloDomanda">${randomQuestions[currentQuestion].question}</h2>
   </div>
   <div id="answer" class="align-center"></div>
-  `;
+  `;                        // viene utilizzato l'array randomQuestion dichiarato sotto per fare in modo che le domande vengano generate casualmente
   /* 
   aggancio il container precedentemente generato
   tramite il for loop partendo da indice = 0, ovvero currentQuestion
@@ -158,7 +158,7 @@ function generateQuestions() {
   sempre utilizzando il template literal abbiamo iniettato nel wrapper il valore (numero) corrente della domanda a cui stiamo rispondendo
   */
   wrapper.innerHTML += `
-  <div id="currentQuestion">Domanda ${currentQuestion + 1}/10</div>
+  <div id="currentQuestion">Domanda ${currentQuestion + 1} <span>/ 10</span></div>
   `
   /* 
   prendiamo ogni singola opzione tra le quattro, aggiungiamo un eventListener che al click triggera la funzione nextQuestion 
@@ -176,7 +176,7 @@ function generateQuestions() {
 
 /* 
 questa funzione controlla se l'array delle risposte è più corto dell'array che contiene tutte le domande
-se la condizione è vera la stringa all'interno del contenitore option viene pushata nell'array userAnswer
+se la condizione è vera la stringa all'interno del contenitore option viene pushata nell'array userAnswers
 l'indice aumenta di 1
 viene riavviata la funzione generateQuestion e viene resettato il timer
 se quella condizione è falsa e quindi l'utente ha risposto a tutte le domande il timer viene fermato
@@ -271,20 +271,41 @@ sarà utilizzata come valore del div con Id risultatoTestuale precedentemente ge
   const risultatoTestuale = document.getElementById("risultatoTestuale"); 
   risultatoTestuale.innerHTML = testo;
 }
-
+/*
+La funzione startTimer imposta un intervallo di tempo di 1000 millisecondi, inizializzando appunto il timer
+*/
 function startTimer () {
   timerInterval = setInterval(function() {updateTimer();}, 1000);
 }
 
+/*
+La funzione stopTimer dà il comando contrario (clearInterval), quindi ferma il timer
+*/
 function stopTimer () {
   clearInterval(timerInterval);
 }
+
+/*
+La funzione updateTimer esegue un refresh a video di timer e progress bar tramite la funzione reloadTimerHtml,
+però imposta la condizione secondo la quale se il timer arriva allo zero, la funzione nextQuestion avrè come
+parametro null invece di string, perciò verrà pushato un valore null nell'array userAnswers poiché non è
+stata effettuata alcuna scelta da parte dell'utente.
+*/
 function updateTimer() {
 
   reloadTimerHtml();
   if (timerSeconds == 0) {nextQuestion(null);}
   else {timerSeconds--;}
-}
+};
+
+/*
+La funzione resetTimer funziona in questa maniera:
+1) ferma il tempo richiamando la funzione stopTimer;
+2) imposta il valore di timerSeconds a 30;
+3) esegue un refresh a video di timer e progress bar tramite la funzione reloadTimerHtml;
+4) imposta il decremento dei secondi di timerSeconds;
+5) fa ripartire il tmepo tramite la funzione startTimer.
+*/
 function resetTimer() {
   stopTimer();
   timerSeconds = 30;
@@ -292,6 +313,14 @@ function resetTimer() {
   timerSeconds--;
   startTimer(); 
 }
+
+/*
+La funzione reloadTimerHtml aggancia il div con id timer nell'html nella variabile orologio;
+imposta il valore dell'orologio con timerSeconds (variabile definita sotto);
+aggancia il div con id progressBar nella variabile progressBar;
+stabilisce un valore percentuale basandosi sul valore di timerSeconds nella variabile percentage;
+tale valore servirà a stabilire la percentuale di riduzione della larghezza della progressBar.
+*/
 function reloadTimerHtml() {
   let orologio = document.getElementById('timer');
   orologio.innerHTML=timerSeconds;
@@ -299,12 +328,23 @@ function reloadTimerHtml() {
   let percentage = (timerSeconds / 30) * 100;
   progressBar.style.width = percentage + '%';
 }
+
 /*
+La funzione randomize:
+1) dichiara che la variabile tempIndex è uguale alla lunghezza dell'array temp;
+2) cicla l'array temp;
+3) dichiara che randValue è un numero casuale tra zero e la lunghezza dell'array temp:
+   questo fa sì che non vengano generati valori al di sopra del numero di elementi contenuti nell'array;
+4) pusha nell'array randomQuestions (che verrà poi utilizzato per la generazione di domande random a ogni refresh della pagina)
+   la domanda selezionata randomicamente (tramite randValue) contenuta nell'array temp;
+5) per far sì che non vengano estratti doppioni nella generazione casuale di un numero attuata da randValue
+   è necessario utilizzare splice, che ci permette di togliere 1 elemento (secondo parametro della funzione) 
+   corrispondente nell'array al numero generato da randvalue (primo parametro della funzione) da temp.
+   Splice in questo caso è in stretta collaborazione con randValue, perché ogni volta che un numero viene generato
+   viene anche automaticamente rimosso il valore corrispondente dall'array, e randValue, potendo generare solo un numero compreso (esistente, disponibile)
+   nella lunghezza dell'array temp, non potrà generare doppioni o numeri non compresi nell'array. 
 
 */
-function stopTimer () {
-  clearInterval(timerInterval);
-}
 function randomize() {
   let tempIndex = temp.length
   for (let i = 0; i < tempIndex; i++) {
@@ -314,11 +354,15 @@ function randomize() {
   }
 }
 /*
-qui c'è la lista delle variabili dichiarate
-timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
-timerInterval è utilizzata per storare il timer in se;
-
-
+qui c'è la lista delle variabili dichiarate:
+1) timerSeconds è utilizzata per storare il valore del timer in un determinato momento;
+2) timerInterval è utilizzata per storare il timer in se;
+3) userAnswers è l'array riempito man mano dalle scelte dell'utente;
+4) temp è l'array "clone" di questions, utilizzato per la randomizzazione delle domande generate a schermo:
+   se avessimo utilizzato l'array originale questions per generare casualmente le domande, non avremmo potuto 
+   fare un confronto tra le risposte dell'utente e le risposte corrette alle domande, rendendo impossibile
+   un calcolo della correttezza o meno delle risposte.
+5) randomQuestions 
 */
 let timerSeconds;
 let timerInterval;
